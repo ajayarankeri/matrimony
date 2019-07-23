@@ -21,7 +21,7 @@ public class UserService {
 	public void registerUser(UserRegisterDto userDto) {
 		User user=new User();
 		BeanUtils.copyProperties(userDto, user);
-		int age=Period.between(user.getBirthDate(),LocalDate.now()).getYears();
+		int age=Period.between(userDto.getBirthDate(),LocalDate.now()).getYears();
 			user.setAge(age);
 		userRepository.save(user);
 	}

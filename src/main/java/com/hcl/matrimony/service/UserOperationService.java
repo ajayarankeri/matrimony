@@ -30,7 +30,7 @@ public class UserOperationService {
 	@Autowired
 	UserRepository  userRepository;
 	
-	public void saveInterest(InterestDto interestDto) throws ResourceNotFoundException, NoSameUserIdException {
+	public String saveInterest(InterestDto interestDto) throws ResourceNotFoundException, NoSameUserIdException {
 		
 		User interestUserObject=userRepository.findById(interestDto.getInterestUserId()).orElseThrow(()-> new ResourceNotFoundException("User id not found"));
 	    User userObject=userRepository.findById(interestDto.getUserId()).orElseThrow(()-> new ResourceNotFoundException("User id not found"));
@@ -42,19 +42,18 @@ public class UserOperationService {
 	    interestObject.setInterestUserId(interestUserObject);
 	    interestObject.setStatus(1);
 	    interestRepository.save(interestObject);
+	    
+	    return "record save";
 	}
 	
 	public List<User> getInterrestedUserList(long id,String type) throws ResourceNotFoundException{
-		System.out.println("Type"+type);
 		if(type.equals("who")) {
-			System.out.println("Type"+type);
 			return interestRepository.findInterestUserIdByWho(id);	
 		}
 		else if(type.equals("whom"))
 		{
 			return interestRepository.findInterestUserIdByWhom(id);
 		}
-		
 		return null;
 	}
 	

@@ -9,7 +9,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -27,9 +26,9 @@ public class Favorite {
 	
 	@OneToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name="user_id")
-	private Long userId;
+	private User userId;
 	
-	@ManyToMany(fetch = FetchType.EAGER)
+	@OneToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name="favorite_user_id")
 	private User favoriteUserId;
 	

@@ -33,7 +33,7 @@ public class UserOperationService {
 		User interestUserObject=userRepository.findById(interestDto.getInterestUserId()).orElseThrow(()-> new ResourceNotFoundException("User id not found"));
 	    User userObject=userRepository.findById(interestDto.getUserId()).orElseThrow(()-> new ResourceNotFoundException("User id not found"));
 	    Interest interestObject=new Interest();
-	    if(interestUserObject.getUserId()==userObject.getUserId()) {
+	    if(interestUserObject.getUserId().equals(userObject.getUserId())) {
 	    	throw new NoSameUserIdException("No same user id");
 	    }
 	    interestObject.setUserId(userObject);

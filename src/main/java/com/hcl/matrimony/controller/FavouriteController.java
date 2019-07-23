@@ -36,14 +36,20 @@ public class FavouriteController {
 		return new ResponseEntity<> ("Favourite added sucessfully",HttpStatus.OK);	
 	}
 	
-	@RequestMapping(value= "/myfavourite/{userId}", method= RequestMethod.GET)
-	public ResponseEntity<List<User>> myfavourite(@PathVariable Long userId) {
+	@RequestMapping(value= "/followings/{userId}", method= RequestMethod.GET)
+	public ResponseEntity<List<User>> followings(@PathVariable Long userId) {
 		HttpHeaders headers = new HttpHeaders();
 		HttpStatus httpStatus = HttpStatus.OK;
-		List<User> favoriteDetails= favouriteService.myfavourite(userId);
-		  
-		//return new ResponseEntity<User> (favoriteDetails,headers,httpStatus);
-		return new ResponseEntity<List<User>>(favoriteDetails,headers,httpStatus);
+		List<User> followingsDetails= favouriteService.followings(userId);
+		return new ResponseEntity<List<User>>(followingsDetails,headers,httpStatus);
+	}
+	
+	@RequestMapping(value= "/followers/{userId}", method= RequestMethod.GET)
+	public ResponseEntity<List<User>> followers(@PathVariable Long userId) {
+		HttpHeaders headers = new HttpHeaders();
+		HttpStatus httpStatus = HttpStatus.OK;
+		List<User> followersDetails= favouriteService.followers(userId);
+		return new ResponseEntity<List<User>>(followersDetails,headers,httpStatus);
 	}
 	
 	

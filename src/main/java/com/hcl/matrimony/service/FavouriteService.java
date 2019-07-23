@@ -38,9 +38,15 @@ public class FavouriteService {
 		favouriteRepository.save(favourite);
 	}
 
-	public List<User> myfavourite(Long userId) {
+	public List<User> followings(Long userId) {
 		// TODO Auto-generated method stub
-	  return	favouriteRepository.findFavouriteUsers(userId);
+	  return	favouriteRepository.findfollowings(userId);
 	
+	}
+
+	public List<User> followers(Long userId) {
+		// TODO Auto-generated method stub
+		 return	favouriteRepository.findfollowers(userId);
+			
 	}
 }

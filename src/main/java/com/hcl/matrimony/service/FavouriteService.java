@@ -26,8 +26,7 @@ public class FavouriteService {
 
 	public List<User> myfavourite(Long userId) {
 		// TODO Auto-generated method stub
-		userRepository.findById(userId);
-		
-		return null;
+	  return	favouriteRepository.findFavouriteUsers(userId);
+	
 	}
 }

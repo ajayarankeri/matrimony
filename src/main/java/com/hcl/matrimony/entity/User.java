@@ -50,5 +50,8 @@ public class User {
 	
 	@Column(name="income")
 	private int income;
+	
+	@Column(name="age")
+	private int age;
 
 }

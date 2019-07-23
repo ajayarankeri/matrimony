@@ -5,8 +5,8 @@ import lombok.Data;
 @Data
 public class SearchUserDto {
 	
-	private int age_from;
-	private int age_to;
+	private int ageFrom;
+	private int ageTo;
 	private String qualification;
 	private String workLocation;
 	private String community;

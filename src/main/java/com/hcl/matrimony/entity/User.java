@@ -58,5 +58,8 @@ public class User {
 	
 	@Column(name="age")
 	private int age;
+	
+	@Column(name="community")
+	private String community;
 
 }

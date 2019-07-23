@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -36,20 +37,20 @@ public class FavouriteController {
 		return new ResponseEntity<> ("Favourite added sucessfully",HttpStatus.OK);	
 	}
 	
-	@RequestMapping(value= "/followings/{userId}", method= RequestMethod.GET)
+	@GetMapping(value= "/followings/{userId}")
 	public ResponseEntity<List<User>> followings(@PathVariable Long userId) {
 		HttpHeaders headers = new HttpHeaders();
 		HttpStatus httpStatus = HttpStatus.OK;
 		List<User> followingsDetails= favouriteService.followings(userId);
-		return new ResponseEntity<List<User>>(followingsDetails,headers,httpStatus);
+		return new ResponseEntity<>(followingsDetails,headers,httpStatus);
 	}
 	
-	@RequestMapping(value= "/followers/{userId}", method= RequestMethod.GET)
+	@GetMapping(value= "/followers/{userId}")
 	public ResponseEntity<List<User>> followers(@PathVariable Long userId) {
 		HttpHeaders headers = new HttpHeaders();
 		HttpStatus httpStatus = HttpStatus.OK;
 		List<User> followersDetails= favouriteService.followers(userId);
-		return new ResponseEntity<List<User>>(followersDetails,headers,httpStatus);
+		return new ResponseEntity<>(followersDetails,headers,httpStatus);
 	}
 	
 	

@@ -1,11 +1,9 @@
 package com.hcl.matrimony.controller;
 
 
-import javax.validation.Valid;
-
 import java.util.List;
-import java.util.Optional;
 
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -16,14 +14,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.hcl.matrimony.dto.InterestDto;
-import com.hcl.matrimony.exception.NoSameUserIdException;
-import com.hcl.matrimony.exception.ResourceNotFoundException;
-import com.hcl.matrimony.service.UserOperationService;
-
-
 import com.hcl.matrimony.dto.SearchUserDto;
 import com.hcl.matrimony.entity.User;
+import com.hcl.matrimony.exception.NoSameUserIdException;
+import com.hcl.matrimony.exception.ResourceNotFoundException;
 import com.hcl.matrimony.repository.UserRepository;
+import com.hcl.matrimony.service.UserOperationService;
 
 
 @RestController

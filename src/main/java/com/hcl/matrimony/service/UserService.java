@@ -17,6 +17,8 @@ public class UserService {
 	
 	@Autowired
 	UserRepository userRepository;
+	
+	User userDetails;
 
 	public void registerUser(UserRegisterDto userDto) {
 		User user=new User();
@@ -29,8 +31,7 @@ public class UserService {
 	public User login(LoginUserDto loginUserDto) {
 		User user=new User();
 		BeanUtils.copyProperties(loginUserDto, user);
-		User userDetails= userRepository.findByUserNameAndPassword(user.getUserName(), user.getPassword());
-		return userDetails;
+		return userDetails= userRepository.findByUserNameAndPassword(user.getUserName(), user.getPassword());
 	}
 
 }

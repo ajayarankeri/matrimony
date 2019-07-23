@@ -3,6 +3,7 @@ package com.hcl.matrimony.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -59,30 +60,40 @@ public class UserOperationService {
 	
 	
 	
-	public List<User> searchUser(SearchUserDto searchUser,String gender){
+	public List<User> searchUser(SearchUserDto searchUser,Long userId)throws ResourceNotFoundException{
+		
+		Optional<User> user= userRepository.findById(userId);
+		String gender=null;
+		if(user.isPresent()) {
+			gender=user.get().getGender();
+		}
+		else {
+			throw new ResourceNotFoundException("Invalid logged in user id");
+		}
 		 List<User> userList=new ArrayList<>();
-	 if(searchUser.getCommunity().isEmpty()&&(searchUser.getIncome()==0)&&searchUser.getQualification().isEmpty()&&
+	    if(searchUser.getCommunity().isEmpty()&&(searchUser.getIncome()==0)&&searchUser.getQualification().isEmpty()&&
 		   searchUser.getWorkLocation().isEmpty()) {
-	 userList =userRepository.searchUser(searchUser.getAge_from(),searchUser.getAge_to(),gender);
-			  
-	 }
-	 else  if((searchUser.getIncome()==0)&&searchUser.getQualification().isEmpty()&& searchUser.getWorkLocation().isEmpty()) {
-		userList=userRepository.searchUserByCommunity(searchUser.getAge_from(),searchUser.getAge_to(),gender,searchUser.getCommunity());
-			
-	}
-	 else if(searchUser.getQualification().isEmpty()&& searchUser.getWorkLocation().isEmpty()){
-		userList=userRepository.searchUserByCommunityAndIncome(searchUser.getAge_from(),searchUser.getAge_to(),gender,searchUser.getCommunity(),
+	       userList =userRepository.searchUser(searchUser.getAgeFrom(),searchUser.getAgeTo(),gender);
+	    }
+	    else  if((searchUser.getIncome()==0)&&searchUser.getQualification().isEmpty()&& searchUser.getWorkLocation().isEmpty()) {
+		userList=userRepository.searchUserByCommunity(searchUser.getAgeFrom(),searchUser.getAgeTo(),gender,searchUser.getCommunity());
+	   }
+	    else if(searchUser.getQualification().isEmpty()&& searchUser.getWorkLocation().isEmpty()){
+		userList=userRepository.searchUserByCommunityAndIncome(searchUser.getAgeFrom(),searchUser.getAgeTo(),gender,searchUser.getCommunity(),
 					  searchUser.getIncome());
-		  }
-	 else if(searchUser.getWorkLocation().isEmpty())  {
-		userList=userRepository.searchUserByCommunityIncomeAndQualification(searchUser.getAge_from(),searchUser.getAge_to(),gender,searchUser.getCommunity(),
+	   }
+	   else if(searchUser.getWorkLocation().isEmpty())  {
+		userList=userRepository.searchUserByCommunityIncomeAndQualification(searchUser.getAgeFrom(),searchUser.getAgeTo(),gender,searchUser.getCommunity(),
 				  searchUser.getIncome(),searchUser.getQualification());
 	 }
 	 else {
 		 
-		 userList=userRepository.searchUserByAllParameters(searchUser.getAge_from(),searchUser.getAge_to(),gender,searchUser.getCommunity(),
+		 userList=userRepository.searchUserByAllParameters(searchUser.getAgeFrom(),searchUser.getAgeTo(),gender,searchUser.getCommunity(),
 				  searchUser.getIncome(),searchUser.getQualification(),searchUser.getWorkLocation());
 	 }
+	    if(userList.isEmpty()) {
+	    	throw new ResourceNotFoundException("No search result found");
+	    }
 		return userList;
 		
 		

@@ -28,7 +28,7 @@ public class FavouriteService {
 		User favouriteUserObject=userRepository.findById(favouriteDto.getFavoriteUserId()).orElseThrow(()-> new ResourceNotFoundException("User id not found"));
 	    User userObject=userRepository.findById(favouriteDto.getUserId()).orElseThrow(()-> new ResourceNotFoundException("User id not found"));
 	    Favourite favourite=new Favourite();
-	    if(favouriteUserObject.getUserId()==userObject.getUserId()) {
+	    if(favouriteUserObject.getUserId().equals(userObject.getUserId())) {
 	    	throw new NoSameUserIdException("Same User id cannot be added");
 	    }
 	    favourite.setUserId(userObject);

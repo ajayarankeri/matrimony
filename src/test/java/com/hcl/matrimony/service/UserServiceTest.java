@@ -2,17 +2,22 @@ package com.hcl.matrimony.service;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertEquals;
+import static org.mockito.Mockito.when;
 
 import java.time.LocalDate;
+import java.time.Period;
 
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
+import org.springframework.beans.BeanUtils;
 
 import com.hcl.matrimony.dto.UserRegisterDto;
+import com.hcl.matrimony.entity.User;
 import com.hcl.matrimony.repository.UserRepository;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -45,7 +50,9 @@ public class UserServiceTest {
 	
 	@Test
 	public void registerUserTest() {
-		Assert.assertNotNull(bookingController.saveBooking(registerDto));
+		UserRegisterDto userDto=new UserRegisterDto();
+		userDto.setBirthDate(LocalDate.of(1993, 05, 12));
+		userService.registerUser(userDto);
 	}
 
 }

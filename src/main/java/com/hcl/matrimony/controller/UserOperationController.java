@@ -35,7 +35,7 @@ public class UserOperationController{
 	public ResponseEntity<List<User>> searchUser(@PathVariable("user_id")Long userId , @RequestBody SearchUserDto searchUser )throws ResourceNotFoundException{
 		if(searchUser.getAgeFrom()==0&&searchUser.getAgeTo()==0)
 			throw new ResourceNotFoundException("Please fill age from and age to parameter"); 
-	 return new ResponseEntity<List<User>>(userOperationService.searchUser(searchUser,userId),HttpStatus.OK);
+	 return new ResponseEntity<>(userOperationService.searchUser(searchUser,userId),HttpStatus.OK);
 	}
 	
 	

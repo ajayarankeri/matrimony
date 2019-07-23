@@ -1,7 +1,5 @@
 package com.hcl.matrimony.service;
 
-
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -69,7 +67,7 @@ public class UserOperationService {
 		else {
 			throw new ResourceNotFoundException("Invalid logged in user id");
 		}
-		 List<User> userList=new ArrayList<>();
+		 List<User> userList;
 	    if(searchUser.getCommunity().isEmpty()&&(searchUser.getIncome()==0)&&searchUser.getQualification().isEmpty()&&
 		   searchUser.getWorkLocation().isEmpty()) {
 	       userList =userRepository.searchUser(searchUser.getAgeFrom(),searchUser.getAgeTo(),gender);

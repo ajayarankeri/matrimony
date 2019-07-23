@@ -9,10 +9,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.hcl.matrimony.dto.SearchUser;
+import com.hcl.matrimony.dto.SearchUserDto;
 import com.hcl.matrimony.entity.User;
 import com.hcl.matrimony.repository.UserRepository;
-
 @RestController
 public class UserOperationController {
 	

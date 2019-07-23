@@ -1,5 +1,10 @@
 package com.hcl.matrimony.controller;
 
+import static org.junit.Assert.assertNotNull;
+import static org.mockito.Mockito.when;
+
+import java.time.LocalDate;
+
 import org.aspectj.lang.annotation.Before;
 import org.junit.Assert;
 import org.junit.Test;
@@ -22,23 +27,17 @@ public class UserControllerTest {
 	@Mock
 	UserService userService;
 	
-
 	
 	@Test
 	public void testRegisterUser() {
-		UserRegisterDto bookingDTO = new UserRegisterDto();
-		
+		UserRegisterDto bookingDTO = new UserRegisterDto();		
 		Assert.assertNotNull(userController.registerUser(bookingDTO));
 	} 
 	
 	@Test
-	public void testLogin() {
-		LoginUserDto loginDto=new LoginUserDto();
-		loginDto.setUserName("ajay");
-		loginDto.setPassword("ajay@123");
-		User user=new User();
-		
-		Assert.assertNotNull(userController.loginUser(loginDto));
-		
+	public void testLoginUser() {
+		when(userService.login(new LoginUserDto())).thenReturn(new User());
+		assertNotNull(userController.loginUser(new LoginUserDto()));
 	}
+	
 }

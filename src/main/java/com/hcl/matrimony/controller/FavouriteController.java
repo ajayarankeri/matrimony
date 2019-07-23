@@ -13,8 +13,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.hcl.matrimony.entity.Favourite;
+import com.hcl.matrimony.dto.FavouriteDto;
 import com.hcl.matrimony.entity.User;
+import com.hcl.matrimony.exception.NoSameUserIdException;
+import com.hcl.matrimony.exception.ResourceNotFoundException;
 import com.hcl.matrimony.repository.FavouriteRepository;
 import com.hcl.matrimony.service.FavouriteService;
 
@@ -29,19 +31,25 @@ public class FavouriteController {
 	FavouriteRepository favouriteRepository;
 	
 	@PostMapping("/addfavourite")
-	public ResponseEntity<Object> addfavourite(@RequestBody Favourite favourite) {
-		favouriteService.addfavourite(favourite);
+	public ResponseEntity<Object> addfavourite(@RequestBody FavouriteDto favouriteDto) throws ResourceNotFoundException, NoSameUserIdException {
+		favouriteService.addfavourite(favouriteDto);
 		return new ResponseEntity<> ("Favourite added sucessfully",HttpStatus.OK);	
 	}
 	
-	@RequestMapping(value= "/myfavourite/{userId}", method= RequestMethod.GET)
-	public ResponseEntity<List<User>> myfavourite(@PathVariable Long userId) {
+	@RequestMapping(value= "/followings/{userId}", method= RequestMethod.GET)
+	public ResponseEntity<List<User>> followings(@PathVariable Long userId) {
 		HttpHeaders headers = new HttpHeaders();
 		HttpStatus httpStatus = HttpStatus.OK;
-		List<User> favoriteDetails= favouriteService.myfavourite(userId);
-		  
-		//return new ResponseEntity<User> (favoriteDetails,headers,httpStatus);
-		return new ResponseEntity<List<User>>(favoriteDetails,headers,httpStatus);
+		List<User> followingsDetails= favouriteService.followings(userId);
+		return new ResponseEntity<List<User>>(followingsDetails,headers,httpStatus);
+	}
+	
+	@RequestMapping(value= "/followers/{userId}", method= RequestMethod.GET)
+	public ResponseEntity<List<User>> followers(@PathVariable Long userId) {
+		HttpHeaders headers = new HttpHeaders();
+		HttpStatus httpStatus = HttpStatus.OK;
+		List<User> followersDetails= favouriteService.followers(userId);
+		return new ResponseEntity<List<User>>(followersDetails,headers,httpStatus);
 	}
 	
 	

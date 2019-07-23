@@ -17,4 +17,5 @@ public class UserRegisterDto {
 	private Long mobNo;
 	private String address;	
 	private int income;
+	private String community;
 }

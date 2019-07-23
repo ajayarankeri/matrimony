@@ -27,7 +27,7 @@ import com.hcl.matrimony.repository.UserRepository;
 
 
 @RestController
-public class UserOperationController {
+public class UserOperationController{
 	
 	@Autowired
 	UserRepository userRepository;
@@ -35,16 +35,11 @@ public class UserOperationController {
 	@Autowired
 	UserOperationService userOperationService;
 	
-	@PostMapping("/serach/{user_id}")
-	public ResponseEntity<List<User>> searchUser(@PathVariable("user_id")Long user_id , @RequestBody SearchUserDto searchUser ){
-		
-		Optional<User> userList= userRepository.findById(user_id);
-		String gender=null;
-		if(userList.isPresent()) {
-			gender=userList.get().getGender();
-	 }
-		return new ResponseEntity<List<User>>(userOperationService.searchUser(searchUser , gender),HttpStatus.OK);
-
+	@PostMapping("/search/{user_id}")
+	public ResponseEntity<List<User>> searchUser(@PathVariable("user_id")Long userId , @RequestBody SearchUserDto searchUser )throws ResourceNotFoundException{
+		if(searchUser.getAgeFrom()==0&&searchUser.getAgeTo()==0)
+			throw new ResourceNotFoundException("Please fill age from and age to parameter"); 
+	 return new ResponseEntity<List<User>>(userOperationService.searchUser(searchUser,userId),HttpStatus.OK);
 	}
 	
 	

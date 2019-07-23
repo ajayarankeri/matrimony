@@ -9,6 +9,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.Data;
 
 @Data
@@ -19,14 +21,17 @@ public class User {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="user_id")
+	@JsonIgnore
 	private Long userId;
 
+	@JsonIgnore
 	@Column(name="user_name")
 	private String userName;
 	
 	@Column(name="full_name")
 	private String fullName;
 	
+	@JsonIgnore
 	@Column(name="password")
 	private String password;
 	

@@ -32,7 +32,7 @@ public class Interest {
 	@JoinColumn(name="interest_user_id")
 	private User interestUserId;
 	
-	@Column(name="updated_date")
-	private LocalDate updatedDate;
-
+	@Column(name="status")
+	private int status;
+	
 }

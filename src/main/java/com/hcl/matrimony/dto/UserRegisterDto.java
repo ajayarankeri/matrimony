@@ -2,42 +2,46 @@ package com.hcl.matrimony.dto;
 
 import java.time.LocalDate;
 
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 import lombok.Data;
 
 @Data
 public class UserRegisterDto {
-	@NotNull
+	
+	@NotNull(message = "userName must not be null")
+	@NotEmpty(message = "userName must not be empty")
 	private String userName;
 	
-	@NotNull
+	@NotNull(message = "password must not be null")
 	private String fullName;
 	
-	@NotNull
+	@NotNull(message = "password must not be null")
+	@NotEmpty(message = "password must not be empty")
 	private String password;
 	
-	@NotNull
+	@NotNull(message = "gender must not be null")
 	private String gender;
 	
-	@NotNull
+	@NotNull(message = "birthDate must not be null")
 	private LocalDate birthDate;
 	
-	@NotNull
+	@NotNull(message = "qualification must not be null")
 	private String qualification;	
 	
-	@NotNull
+	@NotNull(message = "occupation must not be null")
 	private String occupation;	
 	
-	@NotNull
+	@NotNull(message = "mobNo must not be null")
 	private Long mobNo;
 	
-	@NotNull
+	@NotNull(message = "address must not be null")
 	private String address;	
 	
-	@NotNull
+	@NotNull(message = "income must not be null")
 	private int income;
 	
-	@NotNull
+	@NotNull(message = "community must not be null")
 	private String community;
 }

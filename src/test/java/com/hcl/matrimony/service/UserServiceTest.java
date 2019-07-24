@@ -1,10 +1,15 @@
 package com.hcl.matrimony.service;
+import static org.junit.Assert.assertNotNull;
+
 import java.time.LocalDate;
 
+import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.beans.BeanUtils;
 
@@ -22,6 +27,18 @@ public class UserServiceTest {
 	@Mock
 	UserRepository userRepository;
 	
+	User user;
+	LoginUserDto loginDto;
+	
+	@Before
+	public void setUp() {
+		user = new User();
+		loginDto = new LoginUserDto();
+
+		loginDto.setUserName("userName");
+		loginDto.setPassword("password");
+	}
+	
 	@Test
 	public void registerUserTest() {
 		UserRegisterDto userDto=new UserRegisterDto();
@@ -35,12 +52,10 @@ public class UserServiceTest {
 		User user=new User();
 		userRepository.findByUserNameAndPassword(user.getUserName(), user.getPassword());
 	}
-
-	/*
-	 * public User login(LoginUserDto loginUserDto) { 
-	 * User user=new User();
-	 * BeanUtils.copyProperties(loginUserDto, user); return userDetails=
-	 * userRepository.findByUserNameAndPassword(user.getUserName(),
-	 * user.getPassword()); }
-	 */
+	
+	@Test
+	public void TestLoginFaildSenario() {
+		Mockito.when(userRepository.findByUserNameAndPassword("username", "password")).thenReturn(user);
+		assertNotNull(userService.login(loginDto));
+	}
 }

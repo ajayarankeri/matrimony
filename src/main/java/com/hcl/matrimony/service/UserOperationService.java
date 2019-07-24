@@ -3,9 +3,10 @@ package com.hcl.matrimony.service;
 import java.util.List;
 import java.util.Optional;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 
 import com.hcl.matrimony.dto.InterestDto;
 import com.hcl.matrimony.entity.Interest;
@@ -21,7 +22,7 @@ import com.hcl.matrimony.repository.UserRepository;
 @Service
 public class UserOperationService {
 
-
+	Logger logger = LoggerFactory.getLogger(UserOperationService.class);
 	@Autowired
 	InterestRepository interestRepository;
 	
@@ -34,6 +35,7 @@ public class UserOperationService {
 	    User userObject=userRepository.findById(interestDto.getUserId()).orElseThrow(()-> new ResourceNotFoundException("User id not found"));
 	    Interest interestObject=new Interest();
 	    if(interestUserObject.getUserId().equals(userObject.getUserId())) {
+	    	logger.error("No same user Id");
 	    	throw new NoSameUserIdException("No same user id");
 	    }
 	    interestObject.setUserId(userObject);
@@ -87,7 +89,7 @@ public class UserOperationService {
 		 
 		 userList=userRepository.searchUserByAllParameters(searchUser.getAgeFrom(),searchUser.getAgeTo(),gender,searchUser.getCommunity(),
 				  searchUser.getIncome(),searchUser.getQualification(),searchUser.getWorkLocation());
-	 }
+            	 }
 	    if(userList.isEmpty()) {
 	    	throw new ResourceNotFoundException("No search result found");
 	    }

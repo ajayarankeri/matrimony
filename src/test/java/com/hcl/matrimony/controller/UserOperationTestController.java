@@ -1,10 +1,7 @@
 package com.hcl.matrimony.controller;
 
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
 import static org.mockito.Mockito.when;
-
-import java.time.LocalDate;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -14,7 +11,6 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import com.hcl.matrimony.dto.InterestDto;
-import com.hcl.matrimony.entity.User;
 import com.hcl.matrimony.exception.NoSameUserIdException;
 import com.hcl.matrimony.exception.ResourceNotFoundException;
 import com.hcl.matrimony.service.UserOperationService;

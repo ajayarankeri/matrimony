@@ -3,7 +3,6 @@ package com.hcl.matrimony.controller;
 import static org.junit.Assert.assertNotNull;
 import static org.mockito.Mockito.when;
 
-
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;

@@ -1,22 +1,18 @@
 package com.hcl.matrimony.service;
 
 
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
-
-
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.mockito.Mockito.when;
 
 import java.time.LocalDate;
 
-
 import org.junit.Before;
-
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.MockitoJUnitRunner;
 
 import com.hcl.matrimony.dto.InterestDto;
 import com.hcl.matrimony.entity.User;
@@ -88,6 +84,7 @@ public class UserOperationServiceTest {
 	 assertNotNull( userOperationService.saveInterest(interrestDto));
 	}
 	
+
 	@Test(expected = ResourceNotFoundException.class)
 	public void saveInterestTestFail() throws ResourceNotFoundException, NoSameUserIdException {
 		userObject=new User();
@@ -127,6 +124,7 @@ public class UserOperationServiceTest {
    		interrestDto.setStatus(1);
 		 assertNotNull( userOperationService.saveInterest(interrestDtoUpdate));
 	}
+
 	
 	
 	@Test

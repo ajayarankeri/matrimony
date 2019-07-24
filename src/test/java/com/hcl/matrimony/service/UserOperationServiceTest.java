@@ -25,7 +25,7 @@ import com.hcl.matrimony.exception.ResourceNotFoundException;
 import com.hcl.matrimony.repository.InterestRepository;
 import com.hcl.matrimony.repository.UserRepository;
 
-@RunWith(MockitoJUnitRunner.class)
+@RunWith(MockitoJUnitRunner.Silent.class)
 public class UserOperationServiceTest {
 
 	@InjectMocks
@@ -88,7 +88,7 @@ public class UserOperationServiceTest {
 	 assertNotNull( userOperationService.saveInterest(interrestDto));
 	}
 	
-	@Test
+	@Test(expected = ResourceNotFoundException.class)
 	public void saveInterestTestFail() throws ResourceNotFoundException, NoSameUserIdException {
 		userObject=new User();
    		userObject.setUserId(Long.valueOf(2));
@@ -169,7 +169,7 @@ public class UserOperationServiceTest {
 		 assertNotNull( userOperationService.saveInterest(interrestDtoUpdate));
 	}
 
-	@Test
+	@Test(expected = NoSameUserIdException.class)
 	public void saveInterestTestFailForSameId() throws ResourceNotFoundException, NoSameUserIdException {
 		userObject=new User();
    		userObject.setUserId(Long.valueOf(2));

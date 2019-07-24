@@ -1,5 +1,7 @@
 package com.hcl.matrimony.controller;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,20 +20,20 @@ import com.hcl.matrimony.service.UserService;
 @RestController
 @RequestMapping("")
 public class UserController {
-	
 	@Autowired
 	UserService userService;
 	
+	
 	@PostMapping("/register")
-	public ResponseEntity<?> registerUser(@RequestBody UserRegisterDto user) {
+	public ResponseEntity<String> registerUser(@Valid @RequestBody UserRegisterDto user) {
 		userService.registerUser(user);
-		System.out.println("You are registered successfully");
 		return new ResponseEntity<>("You are registered successfully",HttpStatus.OK);
 		
 	}
 	
+	
 	@PostMapping("/login")
-	public ResponseEntity<?> loginUser(@RequestBody LoginUserDto loginUser) {
+	public ResponseEntity<String> loginUser(@Valid @RequestBody LoginUserDto loginUser) {
 	   User user= userService.login(loginUser);
 	   
 	   if(ObjectUtils.isEmpty(user)) {

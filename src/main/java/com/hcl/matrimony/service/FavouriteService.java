@@ -24,11 +24,10 @@ public class FavouriteService {
 	UserRepository userRepository;
 
 	public void addfavourite(FavouriteDto favouriteDto) throws ResourceNotFoundException, NoSameUserIdException {
-		// TODO Auto-generated method stub
 		User favouriteUserObject=userRepository.findById(favouriteDto.getFavoriteUserId()).orElseThrow(()-> new ResourceNotFoundException("User id not found"));
 	    User userObject=userRepository.findById(favouriteDto.getUserId()).orElseThrow(()-> new ResourceNotFoundException("User id not found"));
 	    Favourite favourite=new Favourite();
-	    if(favouriteUserObject.getUserId()==userObject.getUserId()) {
+	    if(favouriteUserObject.getUserId().equals(userObject.getUserId())) {
 	    	throw new NoSameUserIdException("Same User id cannot be added");
 	    }
 	    favourite.setUserId(userObject);
@@ -39,13 +38,11 @@ public class FavouriteService {
 	}
 
 	public List<User> followings(Long userId) {
-		// TODO Auto-generated method stub
-	  return	favouriteRepository.findfollowings(userId);
+	  return favouriteRepository.findfollowings(userId);
 	
 	}
 
 	public List<User> followers(Long userId) {
-		// TODO Auto-generated method stub
 		 return	favouriteRepository.findfollowers(userId);
 			
 	}

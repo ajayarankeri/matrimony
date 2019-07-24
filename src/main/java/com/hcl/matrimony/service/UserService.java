@@ -9,7 +9,6 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.hcl.matrimony.controller.UserController;
 import com.hcl.matrimony.dto.LoginUserDto;
 import com.hcl.matrimony.dto.UserRegisterDto;
 import com.hcl.matrimony.entity.User;
@@ -22,8 +21,7 @@ public class UserService {
 	
 	@Autowired
 	UserRepository userRepository;
-	
-	User userDetails;
+
 
 	public void registerUser(UserRegisterDto userDto) {
 		User user=new User();
@@ -35,9 +33,7 @@ public class UserService {
 	}
 
 	public User login(LoginUserDto loginUserDto) {
-		User user=new User();
-		BeanUtils.copyProperties(loginUserDto, user);
-		return userDetails= userRepository.findByUserNameAndPassword(user.getUserName(), user.getPassword());
+		return  userRepository.findByUserNameAndPassword(loginUserDto.getUserName(), loginUserDto.getPassword());
 	}
 
 }

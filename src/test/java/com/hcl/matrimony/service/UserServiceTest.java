@@ -1,9 +1,8 @@
 package com.hcl.matrimony.service;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertEquals;
 
 import java.time.LocalDate;
 
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -11,7 +10,6 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
-import org.springframework.beans.BeanUtils;
 
 import com.hcl.matrimony.dto.LoginUserDto;
 import com.hcl.matrimony.dto.UserRegisterDto;
@@ -27,16 +25,31 @@ public class UserServiceTest {
 	@Mock
 	UserRepository userRepository;
 	
-	User user;
+	User userObject;
 	LoginUserDto loginDto;
 	
 	@Before
 	public void setUp() {
-		user = new User();
+		
 		loginDto = new LoginUserDto();
 
-		loginDto.setUserName("userName");
-		loginDto.setPassword("password");
+		loginDto.setUserName("vinayak");
+		loginDto.setPassword("test123");
+		userObject=new User();
+   		userObject.setUserId(Long.valueOf(1));
+   		userObject.setAddress("Pune");
+   		userObject.setAge(29);
+   		userObject.setBirthDate(LocalDate.parse("2019-09-09"));
+   		userObject.setFullName("Swapnil Patil");
+   		userObject.setGender("M");
+   		userObject.setIncome(10000);
+   		userObject.setMobNo(9158022154l);
+   		userObject.setOccupation("SD");
+   		userObject.setPassword("test123");
+   		userObject.setQualification("MCA");
+   		userObject.setUserName("vinayak");
+   		userObject.setCommunity("Hindu");
+   		
 	}
 	
 	@Test
@@ -46,16 +59,10 @@ public class UserServiceTest {
 		userService.registerUser(userDto);
 	}
 	
-	@Test
-	public void loginTest() {
-		//LoginUserDto loginUserDto=new LoginUserDto();
-		User user=new User();
-		userRepository.findByUserNameAndPassword(user.getUserName(), user.getPassword());
-	}
 	
 	@Test
 	public void TestLoginFaildSenario() {
-		Mockito.when(userRepository.findByUserNameAndPassword("username", "password")).thenReturn(user);
-		assertNotNull(userService.login(loginDto));
+		Mockito.when(userRepository.findByUserNameAndPassword("vinayak", "test123")).thenReturn(userObject);
+		assertEquals(userObject.getUserId(), userService.login(loginDto).getUserId());
 	}
 }

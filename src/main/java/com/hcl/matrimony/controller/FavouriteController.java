@@ -21,7 +21,7 @@ import com.hcl.matrimony.repository.FavouriteRepository;
 import com.hcl.matrimony.service.FavouriteService;
 
 
-@RestController
+//@RestController
 @RequestMapping("/favourite")
 public class FavouriteController {
 	@Autowired
